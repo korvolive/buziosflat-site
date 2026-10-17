@@ -115,6 +115,19 @@ nav a:hover{color:var(--sea)}
 .rules dd{margin:0;color:var(--ink-2)}
 .rates{background:var(--sand);border-radius:var(--r);padding:1.6rem;display:flex;flex-direction:column;gap:1rem;align-self:start}
 .rates p{color:var(--ink-2)}
+.rate-wrap{margin-top:2rem;display:grid;gap:2rem}
+.rate-wrap>*{min-width:0}
+.rate-wrap h3{margin-bottom:.6rem}
+.table-scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--paper)}
+.rt{width:100%;border-collapse:collapse;min-width:620px;font-size:.95rem}
+.rt th,.rt td{padding:.7rem .9rem;text-align:right;border-bottom:1px solid var(--line);white-space:nowrap}
+.rt th:first-child,.rt td:first-child{text-align:left;white-space:normal}
+.rt thead th{background:var(--sand);font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);font-weight:600;vertical-align:bottom}
+.rt thead th small{display:block;text-transform:none;letter-spacing:0;font-weight:500}
+.rt td{font-variant-numeric:tabular-nums}
+.rt td:first-child small{display:block;color:var(--ink-2);font-size:.82rem}
+.rt tr:last-child td{border-bottom:0}
+.rate-note{font-size:.88rem;color:var(--ink-2)}
 .pet{display:grid;grid-template-columns:44px 1fr;gap:.9rem;margin-top:.4rem}
 .pet ul{margin:.4rem 0 0;padding-left:1.1rem;color:var(--ink-2)}
 @media (max-width:760px){.rules-grid{grid-template-columns:1fr}.rules dl div{grid-template-columns:1fr;gap:.1rem}}
@@ -257,6 +270,11 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 <section class="rules" id="tarifas">
   <div class="wrap">
     <div class="head"><p class="eyebrow" data-i18n="rules_eyebrow">Tarifas e regras</p><h2 data-i18n="rules_title">Bom saber antes de reservar</h2></div>
+    <div class="rate-wrap">
+      <div><h3 data-i18n="rt_daily">Diárias</h3><div class="table-scroll"><table class="rt" id="rt-d"></table></div></div>
+      <div><h3 data-i18n="rt_pack">Pacotes de feriado</h3><div class="table-scroll"><table class="rt" id="rt-p"></table></div></div>
+      <p class="rate-note" data-i18n="rt_note">Valores em reais, por flat, para o número de pessoas indicado. Pacotes são o valor total das noites. Preços sujeitos a alteração e à disponibilidade. Não cobramos taxa de serviço.</p>
+    </div>
     <div class="rules-grid">
       <dl>
         <div><dt>Check-in</dt><dd data-i18n="r_in">A partir das 14h.</dd></div>
@@ -269,8 +287,8 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
       </dl>
       <div style="display:grid;gap:1.5rem;align-content:start">
         <div class="rates">
-          <h3 data-i18n="rates_t">Tarifas</h3>
-          <p data-i18n="rates_d">Os valores mudam conforme a temporada. Feriados, Réveillon e Carnaval têm pacotes com número mínimo de noites. Mande suas datas e respondemos com o valor.</p>
+          <h3 data-i18n="rates_t">Quer reservar?</h3>
+          <p data-i18n="rates_d">Mande suas datas e o número de pessoas pelo WhatsApp. Confirmamos a disponibilidade e o valor na hora.</p>
           <div><a class="btn btn-wa js-wa" href="https://wa.me/5521999936368" target="_blank" rel="noopener" data-i18n="rates_b">Consultar pelo WhatsApp</a></div>
         </div>
         <div class="pet">
@@ -358,17 +376,36 @@ const PHOTOS = {
   praias:  ["praia-01","praia-02"]
 };
 
+// Tarifas: copie uma linha para criar outra. "ate" é o último dia; depois dessa data a linha some do site sozinha.
+// Preços: [Flat Duplo, Família 2 pessoas, Família 3 pessoas, Família 4 pessoas]
+const RATES = [
+  {tipo:"diaria", ate:"2026-11-30", pt:"Setembro a novembro de 2026", en:"September to November 2026", es:"Septiembre a noviembre de 2026", p:[180,207,234,290]},
+  {tipo:"diaria", ate:"2026-12-22", pt:"1 a 22 de dezembro de 2026", en:"December 1–22, 2026", es:"1 al 22 de diciembre de 2026", p:[200,230,260,322]},
+  {tipo:"diaria", ate:"2027-01-31", pt:"Alta temporada · 25/12/2026 a 31/01/2027", en:"High season · Dec 25, 2026 to Jan 31, 2027", es:"Temporada alta · 25/12/2026 al 31/01/2027", p:[370,425,481,595]},
+  {tipo:"diaria", ate:"2027-03-31", pt:"Fevereiro e março de 2027", en:"February and March 2027", es:"Febrero y marzo de 2027", p:[270,310,351,435]},
+  {tipo:"pacote", ate:"2026-11-02", noites:3, pt:"Finados 2026 · 29/10 a 02/11", en:"All Souls' Day 2026 · Oct 29 to Nov 2", es:"Día de Muertos 2026 · 29/10 al 02/11", p:[600,690,780,970]},
+  {tipo:"pacote", ate:"2026-11-22", noites:3, pt:"Consciência Negra 2026 · 19 a 22/11", en:"Black Consciousness Day 2026 · Nov 19–22", es:"Día de la Conciencia Negra 2026 · 19 al 22/11", p:[750,860,975,1210]},
+  {tipo:"pacote", ate:"2026-12-25", noites:3, pt:"Natal 2026 · 22 a 25/12", en:"Christmas 2026 · Dec 22–25", es:"Navidad 2026 · 22 al 25/12", p:[600,690,780,970]},
+  {tipo:"pacote", ate:"2027-01-02", noites:7, pt:"Réveillon 2026/2027", en:"New Year's Eve 2026/2027", es:"Año Nuevo 2026/2027", p:[3800,4370,4940,6115]},
+  {tipo:"pacote", ate:"2027-02-10", noites:5, pt:"Carnaval 2027 · 05 a 10/02", en:"Carnival 2027 · Feb 5–10", es:"Carnaval 2027 · 05 al 10/02", p:[2700,3105,3510,4345]},
+  {tipo:"pacote", ate:"2027-03-28", noites:3, pt:"Semana Santa 2027 · 25 a 28/03", en:"Holy Week 2027 · Mar 25–28", es:"Semana Santa 2027 · 25 al 28/03", p:[750,860,975,1210]}
+];
+const RT_HEAD = {
+  pt:["Período","Flat Duplo","Flat Família","Flat Família","Flat Família"], en:["Period","Double Flat","Family Flat","Family Flat","Family Flat"], es:["Período","Flat Doble","Flat Familia","Flat Familia","Flat Familia"]};
+const RT_PAX = {pt:["2 pessoas","2 pessoas","3 pessoas","4 pessoas"], en:["2 guests","2 guests","3 guests","4 guests"], es:["2 personas","2 personas","3 personas","4 personas"]};
+const NIGHTS = {pt:" noites", en:" nights", es:" noches"};
+
 const T = {
- pt:{},
+ pt:{from:"a partir de",night:"por noite"},
  en:{nav_flats:"Flats",nav_rates:"Rates & rules",nav_gallery:"Gallery",nav_reviews:"Reviews",nav_loc:"Location",nav_contact:"Contact",
   hero_eyebrow:"Tucuns · Armação dos Búzios · Brazil",hero_title:"Your own flat in Búzios, with a <em>pool</em> and the beach close by",hero_lead:"18 flats with full kitchens in Tucuns, near Geribá Beach. Free parking, and your pet is welcome.",
   cta_wa:"Book on WhatsApp",cta_flats:"See the flats",rating:"guest rating, from more than 100 reviews",
   perks_eyebrow:"At the guesthouse",perks_title:"Everything you need to unwind",p1t:"Pool and garden",p1d:"A pool surrounded by 2,000 m² of lawn and trees.",p2t:"Barbecue grills",p2d:"Gather family and friends at the end of the day.",p3t:"Free parking",p3d:"Private on-site parking at no cost.",p4t:"Pets welcome",p4d:"Dogs and cats travel with you.",p5t:"Kitchen and porch",p5d:"Every flat has an equipped kitchen and a porch with a hammock and table.",p6t:"Wi-Fi, TV and A/C",p6d:"Free Wi-Fi, cable TV and air conditioning in every flat.",
   flats_eyebrow:"Our flats",flats_title:"Two ways to stay in Búzios",flats_sub:"18 flats on two floors. Each has an equipped kitchen, private bathroom, air conditioning, ceiling fan, cable TV, Wi-Fi and a porch with a hammock.",
-  f1t:"Double Flat",f1c1:"up to 2 guests",f1c2:"double bed",kit:"kitchen",porch:"porch with hammock",f1d:"The ideal flat for couples. An equipped kitchen for meals at your own pace and air conditioning for summer nights.",price_l:"Rates",price_v:"Ask us on WhatsApp",book:"Book",
+  f1t:"Double Flat",f1c1:"up to 2 guests",f1c2:"double bed",kit:"kitchen",porch:"porch with hammock",f1d:"The ideal flat for couples. An equipped kitchen for meals at your own pace and air conditioning for summer nights.",price_l:"Rates",price_v:"Ask us on WhatsApp",from:"from",night:"per night",book:"Book",
   f2t:"Family Flat",f2c1:"up to 4 guests",f2c2:"double + 2 single",f2d:"Room for the whole family. The kids enjoy the pool while you relax on the porch or by the grill.",
   rules_eyebrow:"Rates & rules",rules_title:"Good to know before booking",r_in:"From 2 pm.",r_out:"By 12 pm. If no one is checking in, you can stay until 2 pm by arrangement.",r_quiet_t:"Quiet hours",r_quiet:"10 pm to 9 am.",r_kids_t:"Children",r_kids:"Welcome. Ask about conditions for young children.",r_park_t:"Parking",r_park:"Free, on site.",r_fee_t:"Service fee",r_fee:"None.",r_bf_t:"Breakfast",r_bf:"Not served. Every flat has an equipped kitchen with a fridge and stove.",
-  rates_t:"Rates",rates_d:"Rates change with the season. Holidays, New Year's Eve and Carnival have packages with a minimum stay. Send us your dates and we'll reply with the price.",rates_b:"Ask on WhatsApp",
+  rates_t:"Ready to book?",rates_d:"Send us your dates and number of guests on WhatsApp. We'll confirm availability and the price right away.",rt_daily:"Nightly rates",rt_pack:"Holiday packages",rt_note:"Prices in Brazilian reais (R$), per flat, for the number of guests shown. Packages are the total for all nights. Prices subject to change and availability. No service fee.",rates_b:"Ask on WhatsApp",
   pet_t:"Your pet is on vacation too",pet_1:"Dogs and cats, up to 2 per flat.",pet_2:"Pets can't be left alone in the flat.",pet_3:"Let us know about your pet when booking.",
   gal_eyebrow:"Gallery",gal_title:"A taste of what awaits you",
   rev_eyebrow:"Reviews",rev_title:"What our guests say",q1:"“Flawless service from the very first contact when booking.”",q2:"“Simply wonderful, we loved everything!”",
@@ -379,10 +416,10 @@ const T = {
   cta_wa:"Reservar por WhatsApp",cta_flats:"Ver los flats",rating:"puntuación de huéspedes, en más de 100 opiniones",
   perks_eyebrow:"En la posada",perks_title:"Todo lo que necesitas para descansar",p1t:"Piscina y jardín",p1d:"Piscina rodeada de 2.000 m² de césped y árboles.",p2t:"Parrillas",p2d:"Para reunir a la familia y los amigos al final del día.",p3t:"Estacionamiento gratis",p3d:"Estacionamiento interno y privado, sin costo.",p4t:"Aceptamos mascotas",p4d:"Perros y gatos viajan contigo.",p5t:"Cocina y galería",p5d:"Cada flat tiene cocina equipada y galería con hamaca y mesa.",p6t:"Wi-Fi, TV y aire",p6d:"Wi-Fi gratis, TV por cable y aire acondicionado en todos los flats.",
   flats_eyebrow:"Nuestros flats",flats_title:"Dos formas de alojarte en Búzios",flats_sub:"Son 18 flats en dos pisos. Todos tienen cocina equipada, baño privado, aire acondicionado, ventilador de techo, TV por cable, Wi-Fi y galería con hamaca.",
-  f1t:"Flat Doble",f1c1:"hasta 2 personas",f1c2:"cama matrimonial",kit:"cocina",porch:"galería con hamaca",f1d:"El flat ideal para parejas. Cocina equipada para comer a tu ritmo y aire acondicionado para las noches de verano.",price_l:"Tarifas",price_v:"Consulta por WhatsApp",book:"Reservar",
+  f1t:"Flat Doble",f1c1:"hasta 2 personas",f1c2:"cama matrimonial",kit:"cocina",porch:"galería con hamaca",f1d:"El flat ideal para parejas. Cocina equipada para comer a tu ritmo y aire acondicionado para las noches de verano.",price_l:"Tarifas",price_v:"Consulta por WhatsApp",from:"desde",night:"por noche",book:"Reservar",
   f2t:"Flat Familia",f2c1:"hasta 4 personas",f2c2:"matrimonial + 2 individuales",f2d:"Espacio para toda la familia. Los chicos disfrutan de la piscina y tú te relajas en la galería o en la parrilla.",
   rules_eyebrow:"Tarifas y normas",rules_title:"Bueno saber antes de reservar",r_in:"Desde las 14:00.",r_out:"Hasta las 12:00. Si nadie entra al flat, puedes quedarte hasta las 14:00, acordándolo con la posada.",r_quiet_t:"Silencio",r_quiet:"De 22:00 a 9:00.",r_kids_t:"Niños",r_kids:"Son bienvenidos. Consulta las condiciones para niños pequeños.",r_park_t:"Estacionamiento",r_park:"Gratis, dentro de la posada.",r_fee_t:"Tasa de servicio",r_fee:"No cobramos.",r_bf_t:"Desayuno",r_bf:"No servimos. Todos los flats tienen cocina equipada con heladera y cocina.",
-  rates_t:"Tarifas",rates_d:"Los precios cambian según la temporada. Feriados, Año Nuevo y Carnaval tienen paquetes con mínimo de noches. Envíanos tus fechas y te respondemos con el precio.",rates_b:"Consultar por WhatsApp",
+  rates_t:"¿Quieres reservar?",rates_d:"Envíanos tus fechas y el número de personas por WhatsApp. Confirmamos la disponibilidad y el precio enseguida.",rt_daily:"Tarifas por noche",rt_pack:"Paquetes de feriados",rt_note:"Precios en reales (R$), por flat, para el número de personas indicado. Los paquetes son el total de las noches. Precios sujetos a cambios y disponibilidad. No cobramos tasa de servicio.",rates_b:"Consultar por WhatsApp",
   pet_t:"Tu mascota también está de vacaciones",pet_1:"Perros y gatos, hasta 2 por flat.",pet_2:"La mascota no puede quedarse sola en el flat.",pet_3:"Avísanos en la reserva que vienes con tu mascota.",
   gal_eyebrow:"Galería",gal_title:"Un poco de lo que te espera",
   rev_eyebrow:"Opiniones",rev_title:"Lo que dicen nuestros huéspedes",q1:"“Atención impecable desde el primer contacto para la reserva.”",q2:"“¡Simplemente maravilloso, nos encantó todo!”",
@@ -392,17 +429,16 @@ const T = {
 const TABS = {pt:{piscina:"Piscina",areas:"Áreas comuns",familia:"Flat Família",duplo:"Flat Duplo",praias:"Praias"},
               en:{piscina:"Pool",areas:"Common areas",familia:"Family Flat",duplo:"Double Flat",praias:"Beaches"},
               es:{piscina:"Piscina",areas:"Áreas comunes",familia:"Flat Familia",duplo:"Flat Doble",praias:"Playas"}};
-const WA_MSG = {pt:"Olá! Gostaria de reservar o {flat} na Búzios Flat Pousada. Datas: __/__ a __/__, para __ pessoas.",
-                en:"Hi! I'd like to book the {flat} at Búzios Flat Pousada. Dates: __/__ to __/__, for __ guests.",
-                es:"¡Hola! Quisiera reservar el {flat} en Búzios Flat Pousada. Fechas: __/__ al __/__, para __ personas."};
-const FLAT_DEFAULT = {pt:"flat",en:"flat",es:"flat"};
+const WA_MSG = {pt:"Olá! Vim através do site e gostaria de mais informações.",
+                en:"Hi! I found you through the website and would like more information.",
+                es:"¡Hola! Llegué a través del sitio web y me gustaría más información."};
 
 let lang = "pt", tab = "piscina";
 document.querySelectorAll("[data-i18n]").forEach(el => T.pt[el.dataset.i18n] = el.textContent);
 document.querySelectorAll("[data-i18n-html]").forEach(el => T.pt[el.dataset.i18nHtml] = el.innerHTML);
 
-function waLink(flat){
-  return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(WA_MSG[lang].replace("{flat}", flat || FLAT_DEFAULT[lang]));
+function waLink(){
+  return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(WA_MSG[lang]);
 }
 function setLang(l){
   lang = l;
@@ -410,12 +446,32 @@ function setLang(l){
   document.querySelectorAll("[data-i18n-html]").forEach(el => { const v = T[l][el.dataset.i18nHtml]; if (v) el.innerHTML = v; });
   document.querySelectorAll(".langs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === l));
   document.documentElement.lang = l === "pt" ? "pt-BR" : l;
-  document.querySelectorAll(".js-wa").forEach(a => {
-    const set = a.closest(".flat")?.dataset.set;
-    a.href = waLink(set ? T[l][set === "duplo" ? "f1t" : "f2t"] : null);
-  });
+  document.querySelectorAll(".js-wa").forEach(a => a.href = waLink());
   renderTabs();
+  renderRates();
   try { localStorage.setItem("bf-lang", l); } catch (e) {}
+}
+
+// tarifas
+const brl = n => "R$ " + n.toLocaleString("pt-BR");
+function renderRates(){
+  const today = new Date().toISOString().slice(0, 10);
+  const live = RATES.filter(r => r.ate >= today);
+  const head = `<thead><tr>${RT_HEAD[lang].map((h, i) => `<th scope="col">${h}${i ? `<small>${RT_PAX[lang][i - 1]}</small>` : ""}</th>`).join("")}</tr></thead>`;
+  for (const [id, tipo] of [["rt-d", "diaria"], ["rt-p", "pacote"]]) {
+    const rows = live.filter(r => r.tipo === tipo).sort((a, b) => a.ate.localeCompare(b.ate));
+    const el = document.getElementById(id);
+    el.closest(".rate-wrap > div").hidden = !rows.length;
+    el.innerHTML = head + "<tbody>" + rows.map(r => `<tr><td>${r[lang]}${r.noites ? `<small>${r.noites}${NIGHTS[lang]}</small>` : ""}</td>${r.p.map(v => `<td>${brl(v)}</td>`).join("")}</tr>`).join("") + "</tbody>";
+  }
+  // "a partir de" nos cartões dos flats, com a menor diária ainda válida
+  const daily = live.filter(r => r.tipo === "diaria");
+  document.querySelectorAll(".flat").forEach(card => {
+    const col = card.dataset.set === "duplo" ? 0 : 1;
+    if (!daily.length) return;
+    const min = Math.min(...daily.map(r => r.p[col]));
+    card.querySelector(".price").innerHTML = `<span>${T[lang].from}</span><b>${brl(min)}</b><span>${T[lang].night}</span>`;
+  });
 }
 
 // galeria
