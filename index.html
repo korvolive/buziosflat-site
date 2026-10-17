@@ -162,10 +162,15 @@ nav a:hover{color:var(--sea)}
 
 /* lightbox */
 .lb[hidden]{display:none}
-.lb{position:fixed;inset:0;z-index:20;background:rgba(5,25,35,.94);display:grid;grid-template-rows:1fr auto;padding:max(16px,env(safe-area-inset-top,0px)) 16px max(16px,env(safe-area-inset-bottom,0px))}
-.lb img{max-width:100%;max-height:100%;margin:auto;object-fit:contain;border-radius:6px;align-self:center}
-.lb-bar{display:flex;justify-content:center;align-items:center;gap:1rem;color:#fff;padding-top:.8rem;font-size:.9rem}
-.lb button{background:rgba(255,255,255,.12);color:#fff;border:0;border-radius:999px;width:44px;height:44px;font-size:1.3rem;cursor:pointer}
+.lb{position:fixed;inset:0;z-index:20;background:#061820;display:grid;place-items:center;padding:max(56px,env(safe-area-inset-top,0px)) 16px max(48px,env(safe-area-inset-bottom,0px));touch-action:pan-y}
+.lb img{max-width:100%;max-height:100%;object-fit:contain;border-radius:6px;user-select:none}
+.lb button{position:absolute;background:rgba(255,255,255,.16);color:#fff;border:0;border-radius:50%;width:52px;height:52px;cursor:pointer;display:grid;place-items:center;backdrop-filter:blur(4px)}
+.lb button:hover{background:rgba(255,255,255,.3)}
+.lb-prev{left:max(12px,env(safe-area-inset-left,0px));top:50%;transform:translateY(-50%)}
+.lb-next{right:max(12px,env(safe-area-inset-right,0px));top:50%;transform:translateY(-50%)}
+.lb-close{top:max(10px,env(safe-area-inset-top,0px));right:max(12px,env(safe-area-inset-right,0px));width:44px!important;height:44px!important}
+.lb-count{position:absolute;bottom:max(14px,env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#fff;font-size:.9rem}
+@media (max-width:600px){.lb button.lb-prev,.lb button.lb-next{width:44px;height:44px;background:rgba(0,0,0,.35)}}
 
 /* depoimentos */
 .reviews{background:var(--sea-deep);color:#F3F8F8}
@@ -388,7 +393,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 
 <div class="lb" hidden role="dialog" aria-modal="true" aria-label="Foto">
   <img alt="">
-  <div class="lb-bar"><button class="lb-prev" aria-label="Anterior">‹</button><span class="lb-count"></span><button class="lb-next" aria-label="Próxima">›</button><button class="lb-close" aria-label="Fechar">×</button></div>
+  <button class="lb-prev" aria-label="Foto anterior"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></button>
+  <button class="lb-next" aria-label="Próxima foto"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l6 6-6 6"/></svg></button>
+  <button class="lb-close" aria-label="Fechar"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <span class="lb-count"></span>
 </div>
 
 <script>
@@ -398,8 +406,7 @@ const PHOTOS = {
   piscina: ["piscina-01","piscina-02","piscina-03","piscina-04","piscina-05","piscina-06"],
   areas:   ["area-01","area-02","area-03","area-04","fachada-01"],
   familia: ["familia-01","familia-02","familia-03","familia-04","familia-05"],
-  duplo:   ["duplo-01","duplo-02","duplo-03","duplo-04","duplo-05"],
-  praias:  ["praia-01","praia-02"]
+  duplo:   ["duplo-01","duplo-02","duplo-03","duplo-04","duplo-05"]
 };
 
 // Tarifas: copie uma linha para criar outra. "ate" é o último dia; depois dessa data a linha some do site sozinha.
@@ -452,9 +459,9 @@ const T = {
   loc_eyebrow:"Ubicación",loc_title:"Cerca de las mejores playas de Búzios",b1:"Playas de Tucuns y Geribá",b1d:"muy cerca",b3:"Rua das Pedras (centro)",map_b:"Abrir en Google Maps",
   ct_eyebrow:"Contacto y reservas",cta_title:"Elige tus fechas y habla directo con nosotros",cta_text:"Respondemos rápido por WhatsApp. Reservando directo, hablas con quien cuida de todo.",phone:"Teléfono"}
 };
-const TABS = {pt:{piscina:"Piscina",areas:"Áreas comuns",familia:"Flat Família",duplo:"Flat Duplo",praias:"Praias"},
-              en:{piscina:"Pool",areas:"Common areas",familia:"Family Flat",duplo:"Double Flat",praias:"Beaches"},
-              es:{piscina:"Piscina",areas:"Áreas comunes",familia:"Flat Familia",duplo:"Flat Doble",praias:"Playas"}};
+const TABS = {pt:{piscina:"Piscina",areas:"Áreas comuns",familia:"Flat Família",duplo:"Flat Duplo"},
+              en:{piscina:"Pool",areas:"Common areas",familia:"Family Flat",duplo:"Double Flat"},
+              es:{piscina:"Piscina",areas:"Áreas comunes",familia:"Flat Familia",duplo:"Flat Doble"}};
 const WA_MSG = {pt:"Olá! Vim através do site e gostaria de mais informações.",
                 en:"Hi! I found you through the website and would like more information.",
                 es:"¡Hola! Llegué a través del sitio web y me gustaría más información."};
@@ -525,6 +532,13 @@ lb.querySelector(".lb-prev").onclick = () => step(-1);
 lb.querySelector(".lb-next").onclick = () => step(1);
 lb.querySelector(".lb-close").onclick = () => lb.hidden = true;
 lb.addEventListener("click", e => { if (e.target === lb) lb.hidden = true; });
+let touchX = null;
+lb.addEventListener("touchstart", e => { touchX = e.touches[0].clientX; }, {passive: true});
+lb.addEventListener("touchend", e => {
+  if (touchX === null) return;
+  const dx = e.changedTouches[0].clientX - touchX; touchX = null;
+  if (Math.abs(dx) > 40) step(dx < 0 ? 1 : -1);
+});
 document.addEventListener("keydown", e => {
   if (lb.hidden) return;
   if (e.key === "Escape") lb.hidden = true;
