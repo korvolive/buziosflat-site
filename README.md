@@ -6,5 +6,5 @@ Site de buziosflat.com.
 - `img/`: fotos do site (versão grande e miniatura `-t`). Para trocar uma foto, substitua o arquivo mantendo o mesmo nome.
 
 O envio para a HostGator é feito pelo arquivo `.github/workflows/deploy.yml`, usando os segredos
-FTP_SERVER, FTP_USERNAME e FTP_PASSWORD cadastrados no repositório. Por enquanto ele só roda pelo
-botão "Run workflow" na aba Actions.
+FTP_SERVER, FTP_USERNAME e FTP_PASSWORD cadastrados no repositório. Toda alteração salva na
+branch `main` é enviada automaticamente.

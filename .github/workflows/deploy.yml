@@ -1,8 +1,8 @@
 name: Enviar site para a HostGator
 
-# Por enquanto só roda quando alguém clicar em "Run workflow" na aba Actions.
-# Depois do backup do site atual, troque para enviar a cada alteração na main.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 jobs:
