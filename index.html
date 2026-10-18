@@ -197,6 +197,8 @@ blockquote{margin:0;padding-top:1rem;border-top:2px solid var(--surf);display:fl
 blockquote p{font-size:1.08rem;line-height:1.5}
 blockquote cite{font-style:normal;font-size:.85rem;opacity:.75}
 @media (max-width:760px){.r-grid{grid-template-columns:1fr}}
+.r-more{margin-top:2rem;text-align:center}
+.r-more .btn-ghost{color:#F3F8F8}
 
 /* localização */
 .loc .wrap{display:grid;grid-template-columns:1fr 1fr;gap:2.5rem;align-items:center}
@@ -367,6 +369,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
       <blockquote><p data-i18n="q2">“Simplesmente maravilhoso, amamos tudo!”</p><cite>Luciana</cite></blockquote>
       <blockquote><p>“Lugar muy recomendable, con instalaciones preciosas.”</p><cite>Juan Manuel</cite></blockquote>
     </div>
+    <div class="r-more"><a class="btn btn-ghost" href="https://www.google.com/maps?cid=17190668508759812911" target="_blank" rel="noopener" data-i18n="rev_all">Ver todas as avaliações no Google</a></div>
   </div>
 </section>
 
@@ -461,7 +464,7 @@ const T = {
   rates_t:"Ready to book?",rates_d:"Send us your dates and number of guests on WhatsApp. We'll confirm availability and the price right away.",rt_daily:"Nightly rates",rt_pack:"Holiday packages",rates_b:"Ask on WhatsApp",
   pet_t:"Your pet is on vacation too",pet_1:"Dogs and cats are welcome.",pet_2:"Fee of R$ 30 per pet for every 7 days of stay.",pet_3:"Let us know about your pet when booking.",pet_rule:"<strong>Important:</strong> pets must be well-behaved and must not disturb other guests. Owners are responsible for cleaning up after their pet, keeping the flat and common areas clean, and for any damage the animal causes.",
   gal_eyebrow:"Gallery",gal_title:"A taste of what awaits you",
-  rev_eyebrow:"Reviews",rev_title:"What our guests say",q1:"“Flawless service from the very first contact when booking.”",q2:"“Simply wonderful, we loved everything!”",
+  rev_eyebrow:"Reviews",rev_all:"See all reviews on Google",rev_title:"What our guests say",q1:"“Flawless service from the very first contact when booking.”",q2:"“Simply wonderful, we loved everything!”",
   loc_eyebrow:"Location",loc_title:"Close to the best beaches in Búzios",b1:"Tucuns and Geribá beaches",b1d:"very close",b3:"Rua das Pedras (downtown)",map_b:"Open in Google Maps",
   ct_eyebrow:"Contact & booking",cta_title:"Pick your dates and talk to us directly",cta_text:"We reply fast on WhatsApp. Book directly and talk to the people who run the place.",phone:"Phone"},
  es:{faq_t:"Preguntas frecuentes",fq1:"¿Qué hay en la cocina del flat?",fq2:"¿Cómo reservo y pago?",fq3:"¿Cuál es la política de cancelación?",fq4:"¿Y si no llego el día o me voy antes?",fq5:"¿Puedo hacer asado y cocinar libremente?",fa1:"<p>Todos los flats tienen cocina equipada, por eso no servimos desayuno y puedes traer bebidas y alimentos a gusto.</p><ul><li>Heladera en los Flats Familia y frigobar grande en los Flats Dobles</li><li>Cocina de 4 hornallas con horno</li><li>Ollas, platos, vasos, cubiertos, termo, soporte para filtro de café y utensilios básicos</li></ul><p>Los cuartos se entregan limpios, desinfectados y ordenados.</p>",fa2:"<ul><li><strong>Períodos normales y feriados:</strong> seña del 50% por transferencia bancaria o Pix, y el resto al llegar.</li><li><strong>Año Nuevo y Carnaval:</strong> hasta 4 cuotas iguales sin interés (seña, 30 días, 60 días y la última hasta 5 días antes del check-in).</li></ul><p>La reserva queda confirmada cuando recibimos el comprobante de la seña por WhatsApp <a href='https://wa.me/5521999936368' target='_blank' rel='noopener'>+55 21 99993-6368</a> o por e-mail a flat@buziosflat.com.br.</p>",fa3:"<p>La cancelación debe enviarse por escrito a flat@buziosflat.com.br, y la Central de Reservas confirma la recepción.</p><div class=\"cancel\"><div><h4>Temporada alta, media y baja</h4><dl><div><dt>15 días o más antes</dt><dd>sin costo</dd></div><div><dt>Menos de 14 días</dt><dd>retención del 50% de la seña</dd></div><div><dt>Menos de 6 días</dt><dd>sin devolución</dd></div></dl></div><div><h4>Paquetes (Año Nuevo, Carnaval, Semana Santa y feriados)</h4><dl><div><dt>30 días o más antes</dt><dd>retención del 25% de la seña</dd></div><div><dt>Menos de 29 días</dt><dd>retención total de la seña</dd></div></dl></div></div><p>En lugar de perder el valor, puedes acordar una nueva fecha con la posada. Los paquetes cancelados solo se pueden reprogramar para períodos normales, con la misma cantidad de noches.</p>",fa4:"<p>Si no llegas en la fecha reservada, el flat se guarda por 24 horas. Después la reserva se cancela con la regla de menos de 6 días, sin devolución.</p><p>Si te vas antes, con paquete o no, se cobra el valor total de la estadía.</p>",fa5:"<ul><li>Prestamos parrillas móviles, gratis, para un asado en familia.</li><li>No se permite usar parrilla eléctrica, olla eléctrica ni grill eléctrico de alto consumo.</li><li>Frituras solo con la olla tapada y la ventana abierta.</li></ul>",nav_flats:"Flats",nav_rates:"Normas",nav_gallery:"Galería",nav_reviews:"Opiniones",nav_loc:"Ubicación",nav_contact:"Contacto",
@@ -475,7 +478,7 @@ const T = {
   rates_t:"¿Quieres reservar?",rates_d:"Envíanos tus fechas y el número de personas por WhatsApp. Confirmamos la disponibilidad y el precio enseguida.",rt_daily:"Tarifas por noche",rt_pack:"Paquetes de feriados",rates_b:"Consultar por WhatsApp",
   pet_t:"Tu mascota también está de vacaciones",pet_1:"Perros y gatos son bienvenidos.",pet_2:"Tasa de R$ 30 por mascota cada 7 días de hospedaje.",pet_3:"Avísanos en la reserva que vienes con tu mascota.",pet_rule:"<strong>Importante:</strong> la mascota debe ser dócil y no puede molestar a los demás huéspedes. El dueño es responsable de recoger sus necesidades, mantener limpios el flat y las áreas comunes, y de cualquier daño que cause el animal.",
   gal_eyebrow:"Galería",gal_title:"Un poco de lo que te espera",
-  rev_eyebrow:"Opiniones",rev_title:"Lo que dicen nuestros huéspedes",q1:"“Atención impecable desde el primer contacto para la reserva.”",q2:"“¡Simplemente maravilloso, nos encantó todo!”",
+  rev_all:"Ver todas las opiniones en Google",rev_eyebrow:"Opiniones",rev_title:"Lo que dicen nuestros huéspedes",q1:"“Atención impecable desde el primer contacto para la reserva.”",q2:"“¡Simplemente maravilloso, nos encantó todo!”",
   loc_eyebrow:"Ubicación",loc_title:"Cerca de las mejores playas de Búzios",b1:"Playas de Tucuns y Geribá",b1d:"muy cerca",b3:"Rua das Pedras (centro)",map_b:"Abrir en Google Maps",
   ct_eyebrow:"Contacto y reservas",cta_title:"Elige tus fechas y habla directo con nosotros",cta_text:"Respondemos rápido por WhatsApp. Reservando directo, hablas con quien cuida de todo.",phone:"Teléfono"}
 };
