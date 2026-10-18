@@ -10,19 +10,31 @@
 <meta property="og:description" content="Flats com cozinha, piscina e estacionamento grátis em Tucuns, Búzios. Aceitamos pets.">
 <meta property="og:image" content="https://www.buziosflat.com/img/og.jpg">
 <meta property="og:url" content="https://www.buziosflat.com/">
+<meta property="og:site_name" content="Búzios Flat Pousada">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:locale:alternate" content="en_US">
+<meta property="og:locale:alternate" content="es_AR">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://www.buziosflat.com/">
+<link rel="alternate" hreflang="pt-BR" href="https://www.buziosflat.com/">
+<link rel="alternate" hreflang="en" href="https://www.buziosflat.com/?lang=en">
+<link rel="alternate" hreflang="es" href="https://www.buziosflat.com/?lang=es">
+<link rel="alternate" hreflang="x-default" href="https://www.buziosflat.com/">
 <meta name="theme-color" content="#0A4D73">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Ccircle cx='15' cy='15' r='14' fill='%230E78A8'/%3E%3Ccircle cx='15' cy='12' r='5' fill='%23fff'/%3E%3Cpath d='M3 19c4-3 8 3 12 0s8 3 12 0v4a12 12 0 0 1-24 0z' fill='%233EC1D3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LodgingBusiness","name":"Búzios Flat Pousada","image":"https://www.buziosflat.com/img/og.jpg","url":"https://www.buziosflat.com/",
- "address":{"@type":"PostalAddress","streetAddress":"Rua Ataliba, 7","addressLocality":"Armação dos Búzios","addressRegion":"RJ","addressCountry":"BR"},
+{"@context":"https://schema.org","@type":"LodgingBusiness","name":"Búzios Flat Pousada","image":["https://www.buziosflat.com/img/og.jpg","https://www.buziosflat.com/img/piscina-01.jpg","https://www.buziosflat.com/img/familia-01.jpg","https://www.buziosflat.com/img/duplo-01.jpg"],"url":"https://www.buziosflat.com/",
+ "description":"Pousada com 18 flats com cozinha equipada, piscina, churrasqueira e estacionamento grátis em Tucuns, Búzios (RJ), perto da Praia de Geribá. Aceita pets.",
+ "numberOfRooms":18,"priceRange":"$$","currenciesAccepted":"BRL","paymentAccepted":"Pix, transferência bancária","hasMap":"https://www.google.com/maps?cid=17190668508759812911",
+ "address":{"@type":"PostalAddress","streetAddress":"Rua Ataliba, 7 - Tucuns","addressLocality":"Armação dos Búzios","addressRegion":"RJ","addressCountry":"BR"},
  "geo":{"@type":"GeoCoordinates","latitude":-22.7845,"longitude":-41.9318},
  "telephone":"+55 21 99641-6717","email":"flat@buziosflat.com.br","petsAllowed":true,"checkinTime":"14:00","checkoutTime":"12:00",
- "amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Piscina","value":true},{"@type":"LocationFeatureSpecification","name":"Estacionamento grátis","value":true},{"@type":"LocationFeatureSpecification","name":"Wi-Fi grátis","value":true}],
- "sameAs":["https://www.instagram.com/buziosflatpousada/","https://www.facebook.com/buziosflatpousada/"]}
+ "amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Piscina","value":true},{"@type":"LocationFeatureSpecification","name":"Estacionamento grátis","value":true},{"@type":"LocationFeatureSpecification","name":"Wi-Fi grátis","value":true},{"@type":"LocationFeatureSpecification","name":"Churrasqueira","value":true},{"@type":"LocationFeatureSpecification","name":"Cozinha equipada","value":true}],
+ "availableLanguage":["Portuguese","English","Spanish"],
+ "sameAs":["https://www.google.com/maps?cid=17190668508759812911","https://www.instagram.com/buziosflatpousada/","https://www.facebook.com/buziosflatpousada/"]}
 </script>
 <style>
 :root{
@@ -490,6 +502,11 @@ const WA_MSG = {pt:"Olá! Vim através do site e gostaria de mais informações.
                 es:"¡Hola! Llegué a través del sitio web y me gustaría más información."};
 
 let lang = "pt", tab = "piscina";
+const META = {
+  pt: {title: "Búzios Flat Pousada · Flats com cozinha e piscina em Tucuns, Búzios", desc: "18 flats com cozinha completa, piscina, churrasqueira e estacionamento grátis em Tucuns, Búzios (RJ), perto da Praia de Geribá. Aceitamos pets. Reserve pelo WhatsApp."},
+  en: {title: "Búzios Flat Pousada · Flats with kitchen and pool in Tucuns, Búzios", desc: "18 flats with a full kitchen, pool, barbecue area and free parking in Tucuns, Búzios (Brazil), near Geribá Beach. Pets welcome. Book on WhatsApp."},
+  es: {title: "Búzios Flat Pousada · Flats con cocina y piscina en Tucuns, Búzios", desc: "18 flats con cocina completa, piscina, parrilla y estacionamiento gratis en Tucuns, Búzios (Brasil), cerca de la Playa Geribá. Aceptamos mascotas. Reserva por WhatsApp."}
+};
 document.querySelectorAll("[data-i18n]").forEach(el => T.pt[el.dataset.i18n] = el.textContent);
 document.querySelectorAll("[data-i18n-html]").forEach(el => T.pt[el.dataset.i18nHtml] = el.innerHTML);
 
@@ -502,6 +519,11 @@ function setLang(l){
   document.querySelectorAll("[data-i18n-html]").forEach(el => { const v = T[l][el.dataset.i18nHtml]; if (v) el.innerHTML = v; });
   document.querySelectorAll(".langs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === l));
   document.documentElement.lang = l === "pt" ? "pt-BR" : l;
+  document.title = META[l].title;
+  document.querySelector('meta[name="description"]').content = META[l].desc;
+  const url = "https://www.buziosflat.com/" + (l === "pt" ? "" : "?lang=" + l);
+  document.querySelector('link[rel="canonical"]').href = url;
+  try { history.replaceState(null, "", (l === "pt" ? location.pathname : "?lang=" + l) + location.hash); } catch (e) {}
   document.querySelectorAll(".js-wa").forEach(a => a.href = waLink());
   renderTabs();
   renderRates();
@@ -565,9 +587,11 @@ document.addEventListener("keydown", e => {
 
 document.querySelectorAll(".langs button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
 document.getElementById("ano").textContent = new Date().getFullYear();
-let start = "pt";
-try { start = localStorage.getItem("bf-lang") || ""; } catch (e) {}
-if (!T[start] || !start) { const n = (navigator.language || "pt").slice(0, 2); start = n === "es" ? "es" : n === "pt" ? "pt" : "en"; }
+let start = new URLSearchParams(location.search).get("lang") || "";
+if (!T[start]) { try { start = localStorage.getItem("bf-lang") || ""; } catch (e) {} }
+// robôs de busca (Google etc.) sempre veem o português na página principal
+if (!T[start] && /bot|crawl|spider|slurp|lighthouse/i.test(navigator.userAgent)) start = "pt";
+if (!T[start]) { const n = (navigator.language || "pt").slice(0, 2); start = n === "es" ? "es" : n === "pt" ? "pt" : "en"; }
 setLang(start);
 </script>
 </body>
