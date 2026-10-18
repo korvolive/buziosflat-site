@@ -105,8 +105,6 @@ nav a:hover{color:var(--sea)}
 .chip{font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:.15rem .6rem;color:var(--ink-2)}
 .flat p{color:var(--ink-2)}
 .flat-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:auto;padding-top:.8rem;border-top:1px dashed var(--line);flex-wrap:wrap}
-.price{font-size:.9rem;color:var(--ink-2)}
-.price b{display:block;font-family:var(--display);font-size:1.3rem;color:var(--ink)}
 @media (max-width:720px){.flats-grid{grid-template-columns:1fr}}
 
 /* tarifas e regras */
@@ -286,7 +284,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
           <h3 data-i18n="f1t">Flat Duplo</h3>
           <div class="flat-meta"><span class="chip" data-i18n="f1c1">até 2 pessoas</span><span class="chip" data-i18n="f1c2">cama de casal</span><span class="chip" data-i18n="kit">cozinha</span><span class="chip" data-i18n="porch">varanda com rede</span></div>
           <p data-i18n="f1d">O flat ideal para casais. Cozinha equipada para as refeições no seu ritmo, ar-condicionado e ventilador de teto para as noites de verão.</p>
-          <div class="flat-foot"><div class="price"><span data-i18n="price_l">Diárias</span><b data-i18n="price_v">Consulte pelo WhatsApp</b></div><a class="btn btn-wa btn-sm js-wa" href="https://wa.me/5521999936368" target="_blank" rel="noopener" data-i18n="book">Reservar</a></div>
+          <div class="flat-foot"><a class="btn btn-wa btn-sm js-wa" href="https://wa.me/5521999936368" target="_blank" rel="noopener" data-i18n="book">Reservar</a></div>
         </div>
       </article>
       <article class="flat" data-set="familia">
@@ -296,7 +294,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
           <h3 data-i18n="f2t">Flat Família</h3>
           <div class="flat-meta"><span class="chip" data-i18n="f2c1">até 4 pessoas</span><span class="chip" data-i18n="f2c2">casal + 2 solteiro</span><span class="chip" data-i18n="kit">cozinha</span><span class="chip" data-i18n="porch">varanda com rede</span></div>
           <p data-i18n="f2d">Espaço para a família toda. As crianças aproveitam a piscina e você relaxa na varanda ou na churrasqueira.</p>
-          <div class="flat-foot"><div class="price"><span data-i18n="price_l">Diárias</span><b data-i18n="price_v">Consulte pelo WhatsApp</b></div><a class="btn btn-wa btn-sm js-wa" href="https://wa.me/5521999936368" target="_blank" rel="noopener" data-i18n="book">Reservar</a></div>
+          <div class="flat-foot"><a class="btn btn-wa btn-sm js-wa" href="https://wa.me/5521999936368" target="_blank" rel="noopener" data-i18n="book">Reservar</a></div>
         </div>
       </article>
     </div>
@@ -512,14 +510,6 @@ function renderRates(){
     el.closest(".rate-wrap > div").hidden = !rows.length;
     el.innerHTML = head + "<tbody>" + rows.map(r => `<tr><td>${r[lang]}${r.noites ? `<small>${r.noites}${NIGHTS[lang]}</small>` : ""}</td>${r.p.map((v, i) => `<td data-l="${RT_HEAD[lang][i + 1]} · ${RT_PAX[lang][i]}">${brl(v)}</td>`).join("")}</tr>`).join("") + "</tbody>";
   }
-  // "a partir de" nos cartões dos flats, com a menor diária ainda válida
-  const daily = live.filter(r => r.tipo === "diaria");
-  document.querySelectorAll(".flat").forEach(card => {
-    const col = card.dataset.set === "duplo" ? 0 : 1;
-    if (!daily.length) return;
-    const min = Math.min(...daily.map(r => r.p[col]));
-    card.querySelector(".price").innerHTML = `<span>${T[lang].from}</span><b>${brl(min)}</b><span>${T[lang].night}</span>`;
-  });
 }
 
 // galeria
