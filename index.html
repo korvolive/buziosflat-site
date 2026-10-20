@@ -117,6 +117,7 @@ nav a:hover{color:var(--sea)}
 .thumbs img{width:100%;height:100%;object-fit:cover}
 .flat-body{padding:1.4rem;display:flex;flex-direction:column;gap:.8rem;flex:1}
 .flat-meta{display:flex;flex-wrap:wrap;gap:.4rem}
+.flat-body h3 .area{font-family:var(--body,inherit);font-size:.95rem;font-weight:500;color:var(--ink-2);white-space:nowrap;margin-left:.3rem}
 .chip{font-size:.8rem;border:1px solid var(--line);border-radius:999px;padding:.15rem .6rem;color:var(--ink-2)}
 .flat p{color:var(--ink-2)}
 .flat-foot{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:auto;padding-top:.8rem;border-top:1px dashed var(--line);flex-wrap:wrap}
@@ -299,7 +300,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
         <button class="flat-cover" data-open="duplo:0"><img src="img/duplo-06.jpg" alt="Quarto do Flat Duplo com cama de casal" loading="lazy" width="1400" height="1050"></button>
         <div class="thumbs"></div>
         <div class="flat-body">
-          <h3 data-i18n="f1t">Flat Duplo</h3>
+          <h3><span data-i18n="f1t">Flat Duplo</span> <small class="area"><span data-i18n="aprox">aprox.</span> 15 m²</small></h3>
           <div class="flat-meta"><span class="chip" data-i18n="f1c1">até 2 pessoas</span><span class="chip" data-i18n="f1c2">cama de casal</span><span class="chip" data-i18n="kit">cozinha</span><span class="chip" data-i18n="porch">varanda com rede</span></div>
           <p data-i18n="f1d">O flat ideal para casais.</p>
           <div class="flat-foot"><a class="btn btn-wa btn-sm js-wa" href="https://wa.me/5521999936368" target="_blank" rel="noopener" data-i18n="book">Reservar</a></div>
@@ -309,7 +310,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
         <button class="flat-cover" data-open="familia:0"><img src="img/familia-01.jpg" alt="Flat Família com cama de casal e camas de solteiro" loading="lazy" width="1400" height="1050"></button>
         <div class="thumbs"></div>
         <div class="flat-body">
-          <h3 data-i18n="f2t">Flat Família</h3>
+          <h3><span data-i18n="f2t">Flat Família</span> <small class="area"><span data-i18n="aprox">aprox.</span> 30 m²</small></h3>
           <div class="flat-meta"><span class="chip" data-i18n="f2c1">até 4 pessoas</span><span class="chip" data-i18n="f2c2">casal + 2 solteiro</span><span class="chip" data-i18n="kit">cozinha</span><span class="chip" data-i18n="porch">varanda com rede</span></div>
           <p data-i18n="f2d">Espaço para a família toda.</p>
           <div class="flat-foot"><a class="btn btn-wa btn-sm js-wa" href="https://wa.me/5521999936368" target="_blank" rel="noopener" data-i18n="book">Reservar</a></div>
@@ -470,7 +471,7 @@ const T = {
   cta_wa:"Book on WhatsApp",cta_online:"Book online",online_l:"Online booking",rates_on:"Prefer to see open dates and book right away? Use online booking.",cta_flats:"See the flats",rating:"guest rating, from more than 100 reviews",
   perks_eyebrow:"At the guesthouse",perks_title:"Everything you need to unwind",p1t:"Pool and garden",p1d:"A pool surrounded by 2,000 m² of lawn and trees.",p2t:"Barbecue grills",p2d:"Portable grills for guests.",p3t:"Parking",p3d:"Private on-site parking.",p4t:"Pets welcome",p4d:"Dogs and cats travel with you.",p5t:"Kitchen and porch",p5d:"Full kitchen and a porch with a hammock and table in every flat.",p6t:"Wi-Fi, TV and A/C",p6d:"Wi-Fi, cable TV, air conditioning and a ceiling fan in every flat.",
   flats_eyebrow:"Our flats",flats_sub:"18 flats on two floors. Each has an equipped kitchen, private bathroom, air conditioning, ceiling fan, cable TV, Wi-Fi and a porch with a hammock.",
-  f1t:"Double Flat",f1c1:"up to 2 guests",f1c2:"double bed",kit:"kitchen",porch:"porch with hammock",f1d:"The ideal flat for couples.",price_l:"Rates",price_v:"Ask us on WhatsApp",from:"from",night:"per night",book:"Book",
+  f1t:"Double Flat",f1c1:"up to 2 guests",f1c2:"double bed",kit:"kitchen",porch:"porch with hammock",f1d:"The ideal flat for couples.",aprox:"approx.",price_l:"Rates",price_v:"Ask us on WhatsApp",from:"from",night:"per night",book:"Book",
   f2t:"Family Flat",f2c1:"up to 4 guests",f2c2:"double + 2 single",f2d:"Room for the whole family.",
   rules_eyebrow:"House rules",rules_title:"Good to know before booking",r_in:"From 2 pm.",r_out:"By 12 pm. If no one is checking in, you can stay until 3 pm by arrangement.",r_quiet_t:"Quiet hours",r_quiet:"10 pm to 9 am.",r_kids_t:"Children",r_kids:"Welcome. One child up to 5 years old per flat, staying with the parents, is free.",r_park_t:"On-site parking",r_park:"Free, up to one vehicle per flat.",r_fee_t:"Service fee",r_fee:"None.",r_bf_t:"Breakfast",r_bf:"Not served, since every flat has an equipped kitchen with a refrigerator, 4-burner stove with oven, pots, plates, glasses, cutlery and basic utensils.",
   rates_t:"Ready to book?",rates_d:"Send us your dates and number of guests on WhatsApp. We'll confirm availability and the price right away.",rt_daily:"Nightly rates",rt_pack:"Holiday packages",rates_b:"Ask on WhatsApp",
@@ -484,7 +485,7 @@ const T = {
   cta_wa:"Reservar por WhatsApp",cta_online:"Reservar online",online_l:"Reserva online",rates_on:"¿Prefieres ver las fechas libres y reservar al instante? Usa la reserva online.",cta_flats:"Ver los flats",rating:"puntuación de huéspedes, en más de 100 opiniones",
   perks_eyebrow:"En la posada",perks_title:"Todo lo que necesitas para descansar",p1t:"Piscina y jardín",p1d:"Piscina rodeada de 2.000 m² de césped y árboles.",p2t:"Parrillas",p2d:"Parrillas móviles para los huéspedes.",p3t:"Estacionamiento",p3d:"Estacionamiento interno y privado.",p4t:"Aceptamos mascotas",p4d:"Perros y gatos viajan contigo.",p5t:"Cocina y galería",p5d:"Cocina completa y galería con hamaca y mesa en todos los flats.",p6t:"Wi-Fi, TV y aire",p6d:"Wi-Fi, TV por cable, aire acondicionado y ventilador de techo en todos los flats.",
   flats_eyebrow:"Nuestros flats",flats_sub:"Son 18 flats en dos pisos. Todos tienen cocina equipada, baño privado, aire acondicionado, ventilador de techo, TV por cable, Wi-Fi y galería con hamaca.",
-  f1t:"Flat Doble",f1c1:"hasta 2 personas",f1c2:"cama matrimonial",kit:"cocina",porch:"galería con hamaca",f1d:"El flat ideal para parejas.",price_l:"Tarifas",price_v:"Consulta por WhatsApp",from:"desde",night:"por noche",book:"Reservar",
+  f1t:"Flat Doble",f1c1:"hasta 2 personas",f1c2:"cama matrimonial",kit:"cocina",porch:"galería con hamaca",f1d:"El flat ideal para parejas.",aprox:"aprox.",price_l:"Tarifas",price_v:"Consulta por WhatsApp",from:"desde",night:"por noche",book:"Reservar",
   f2t:"Flat Familia",f2c1:"hasta 4 personas",f2c2:"matrimonial + 2 individuales",f2d:"Espacio para toda la familia.",
   rules_eyebrow:"Normas de la posada",rules_title:"Bueno saber antes de reservar",r_in:"Desde las 14:00.",r_out:"Hasta las 12:00. Si nadie entra al flat, puedes quedarte hasta las 15:00, acordándolo con la posada.",r_quiet_t:"Silencio",r_quiet:"De 22:00 a 9:00.",r_kids_t:"Niños",r_kids:"Son bienvenidos. Un niño de hasta 5 años por flat, acompañado de los padres, no paga.",r_park_t:"Estacionamiento interno",r_park:"Gratis, hasta un vehículo por flat.",r_fee_t:"Tasa de servicio",r_fee:"No cobramos.",r_bf_t:"Desayuno",r_bf:"No servimos, ya que todos los flats tienen cocina equipada con refrigerador, cocina de 4 hornallas con horno, ollas, platos, vasos, cubiertos y utensilios básicos.",
   rates_t:"¿Quieres reservar?",rates_d:"Envíanos tus fechas y el número de personas por WhatsApp. Confirmamos la disponibilidad y el precio enseguida.",rt_daily:"Tarifas por noche",rt_pack:"Paquetes de feriados",rates_b:"Consultar por WhatsApp",
