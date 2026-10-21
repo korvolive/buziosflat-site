@@ -19,3 +19,12 @@ jobs:
           for u in https://www.buziosflat.com/ https://buziosflat.com/ http://www.buziosflat.com/ http://www.buziosflat.com.br/ https://www.buziosflat.com.br/ http://buziosflat.com.br/; do
             h=$(curl -sS -m 20 -o /tmp/p.html -D - "$u" 2>&1 | grep -iE '^(HTTP|location|server|curl)' | tr -d '\r' | tr '\n' ' '); t=$(grep -o '<title>[^<]*' /tmp/p.html | head -1); n=$(grep -c 'Horário de descanso' /tmp/p.html); echo "::warning::$u => $h | $t | novo=$n"
           done
+      - name: Detalhes
+        run: |
+          set +e
+          for u in https://www.buziosflat.com/index.html https://www.buziosflat.com/index.php https://www.buziosflat.com/wp-login.php https://www.buziosflat.com/img/duplo-09.jpg https://www.buziosflat.com/robots.txt https://www.buziosflat.com/sitemap.xml; do
+            h=$(curl -sS -m 20 -o /tmp/p.html -D - "$u" 2>&1 | grep -iE '^(HTTP|location|last-modified|content-type)' | tr -d '\r' | tr '\n' ' '); t=$(grep -o '<title>[^<]*' /tmp/p.html | head -1); n=$(grep -c 'Horário de descanso' /tmp/p.html); echo "::warning::$u => $h | $t | novo=$n"
+          done
+          curl -sS -m 20 https://www.buziosflat.com/ -o /tmp/h.html
+          echo "::warning::GEN $(grep -o '<meta name=.generator[^>]*' /tmp/h.html | head -2 | tr '\n' ' ') WP=$(grep -c 'wp-content' /tmp/h.html) LINKS=$(grep -o 'wp-content/[a-z]*/[a-zA-Z0-9_-]*' /tmp/h.html | sort -u | head -8 | tr '\n' ' ')"
+          echo "::warning::HOSTS $(grep -oE 'https?://[a-zA-Z0-9.-]+' /tmp/h.html | sort | uniq -c | sort -rn | head -6 | tr '\n' ' ')"
