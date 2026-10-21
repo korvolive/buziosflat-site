@@ -16,8 +16,8 @@ jobs:
       - name: HTTP
         run: |
           set +e
-          for u in https://www.buziosflat.com/ https://buziosflat.com/ http://www.buziosflat.com/ http://www.buziosflat.com.br/ https://www.buziosflat.com.br/ http://buziosflat.com.br/; do
-            h=$(curl -sS -m 20 -o /tmp/p.html -D - "$u" 2>&1 | grep -iE '^(HTTP|location|server|curl)' | tr -d '\r' | tr '\n' ' '); t=$(grep -o '<title>[^<]*' /tmp/p.html | head -1); n=$(grep -c 'Horário de descanso' /tmp/p.html); echo "::warning::$u => $h | $t | novo=$n"
+          for u in https://www.buziosflat.com/ https://buziosflat.com/ http://www.buziosflat.com/ https://www.buziosflat.com/?nc=$RANDOM https://buziosflat.com/?nc=$RANDOM http://www.buziosflat.com.br/ https://www.buziosflat.com.br/ http://buziosflat.com.br/; do
+            h=$(curl -sS -m 20 -o /tmp/p.html -D - "$u" 2>&1 | grep -iE '^(HTTP|location|server|curl|x-.*cache|cache-control|age)' | tr -d '\r' | tr '\n' ' '); t=$(grep -o '<title>[^<]*' /tmp/p.html | head -1); n=$(grep -c 'Horário de descanso' /tmp/p.html); echo "::warning::$u => $h | $t | novo=$n"
           done
       - name: Detalhes
         run: |
