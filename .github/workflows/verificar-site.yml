@@ -15,6 +15,7 @@ jobs:
           for d in buziosflat.com www.buziosflat.com buziosflat.com.br www.buziosflat.com.br; do echo "::warning::DNS $d NS=$(dig +short NS $d | tr '\n' ' ') A=$(dig +short A $d | tr '\n' ' ')"; done
       - name: HTTP
         run: |
+          set +e
           for u in https://www.buziosflat.com/ https://buziosflat.com/ http://www.buziosflat.com/ http://www.buziosflat.com.br/ https://www.buziosflat.com.br/ http://buziosflat.com.br/; do
             h=$(curl -sS -m 20 -o /tmp/p.html -D - "$u" 2>&1 | grep -iE '^(HTTP|location|server|curl)' | tr -d '\r' | tr '\n' ' '); t=$(grep -o '<title>[^<]*' /tmp/p.html | head -1); n=$(grep -c 'Horário de descanso' /tmp/p.html); echo "::warning::$u => $h | $t | novo=$n"
           done
