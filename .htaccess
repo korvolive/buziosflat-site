@@ -1,6 +1,13 @@
 # Site novo (index.html) tem prioridade sobre qualquer index.php na pasta
 DirectoryIndex index.html index.php
 
+# Página sempre atualizada: navegador e cache da HostGator conferem a versão nova a cada visita
+<IfModule mod_headers.c>
+<FilesMatch "\.(html|xml|txt)$">
+Header set Cache-Control "no-cache, must-revalidate"
+</FilesMatch>
+</IfModule>
+
 # BEGIN WordPress
 <IfModule mod_rewrite.c>
 RewriteEngine On
