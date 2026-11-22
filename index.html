@@ -9,6 +9,9 @@
 <meta property="og:title" content="Búzios Flat Pousada">
 <meta property="og:description" content="Flats com cozinha, piscina e estacionamento em Tucuns, Búzios. Aceitamos pets.">
 <meta property="og:image" content="https://www.buziosflat.com/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Búzios Flat Pousada, piscina e jardim em Tucuns, Búzios">
 <meta property="og:url" content="https://www.buziosflat.com/">
 <meta property="og:site_name" content="Búzios Flat Pousada">
 <meta property="og:locale" content="pt_BR">
@@ -17,16 +20,19 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="canonical" href="https://www.buziosflat.com/">
 <link rel="alternate" hreflang="pt-BR" href="https://www.buziosflat.com/">
-<link rel="alternate" hreflang="en" href="https://www.buziosflat.com/?lang=en">
-<link rel="alternate" hreflang="es" href="https://www.buziosflat.com/?lang=es">
+<link rel="alternate" hreflang="en" href="https://www.buziosflat.com/en/">
+<link rel="alternate" hreflang="es" href="https://www.buziosflat.com/es/">
 <link rel="alternate" hreflang="x-default" href="https://www.buziosflat.com/">
 <meta name="theme-color" content="#0A4D73">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3E%3Ccircle cx='15' cy='15' r='14' fill='%230E78A8'/%3E%3Ccircle cx='15' cy='12' r='5' fill='%23fff'/%3E%3Cpath d='M3 19c4-3 8 3 12 0s8 3 12 0v4a12 12 0 0 1-24 0z' fill='%233EC1D3'/%3E%3C/svg%3E">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preload" as="image" href="/img/fachada-02.jpg" imagesrcset="/img/fachada-02-m.jpg 900w, /img/fachada-02.jpg 1600w" imagesizes="(max-width:800px) 100vw, 640px" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Figtree:wght@400;500;600&display=swap">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"LodgingBusiness","name":"Búzios Flat Pousada","image":["https://www.buziosflat.com/img/og.jpg","https://www.buziosflat.com/img/piscina-01.jpg","https://www.buziosflat.com/img/familia-01.jpg","https://www.buziosflat.com/img/duplo-01.jpg"],"url":"https://www.buziosflat.com/",
+{"@context":"https://schema.org","@type":"LodgingBusiness","@id":"https://www.buziosflat.com/#pousada","name":"Búzios Flat Pousada","image":["https://www.buziosflat.com/img/og.jpg","https://www.buziosflat.com/img/piscina-01.jpg","https://www.buziosflat.com/img/familia-01.jpg","https://www.buziosflat.com/img/duplo-01.jpg"],"url":"https://www.buziosflat.com/",
  "description":"Pousada com 18 flats com cozinha equipada, piscina, churrasqueira e estacionamento em Tucuns, Búzios (RJ), perto da Praia de Geribá. Aceita pets.",
  "numberOfRooms":18,"priceRange":"$$","currenciesAccepted":"BRL","paymentAccepted":"Pix, transferência bancária","hasMap":"https://www.google.com/maps?cid=17190668508759812911",
  "address":{"@type":"PostalAddress","streetAddress":"Rua Ataliba, 7 - Tucuns","addressLocality":"Armação dos Búzios","addressRegion":"RJ","addressCountry":"BR"},
@@ -35,6 +41,9 @@
  "amenityFeature":[{"@type":"LocationFeatureSpecification","name":"Piscina","value":true},{"@type":"LocationFeatureSpecification","name":"Estacionamento","value":true},{"@type":"LocationFeatureSpecification","name":"Wi-Fi","value":true},{"@type":"LocationFeatureSpecification","name":"Churrasqueira","value":true},{"@type":"LocationFeatureSpecification","name":"Cozinha equipada","value":true}],
  "availableLanguage":["Portuguese","English","Spanish"],
  "sameAs":["https://www.google.com/maps?cid=17190668508759812911","https://www.instagram.com/buziosflatpousada/","https://www.facebook.com/buziosflatpousada/"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","@id":"https://www.buziosflat.com/#site","name":"Búzios Flat Pousada","alternateName":"Búzios Flat","url":"https://www.buziosflat.com/","inLanguage":["pt-BR","en","es"],"publisher":{"@id":"https://www.buziosflat.com/#pousada"}}
 </script>
 <style>
 :root{
@@ -79,10 +88,10 @@ nav{display:flex;gap:1.1rem;margin-left:auto;font-size:.92rem}
 nav a{text-decoration:none;color:var(--ink-2)}
 nav a:hover{color:var(--sea)}
 .langs{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;flex:none}
-.langs button{font:600 .78rem var(--body);background:none;border:0;padding:.35rem .6rem;color:var(--ink-2);cursor:pointer}
-.langs button[aria-pressed="true"]{background:var(--sea);color:#fff}
+.langs a{font:600 .78rem var(--body);padding:.35rem .6rem;color:var(--ink-2);text-decoration:none;line-height:1.4}
+.langs a[aria-current="true"]{background:var(--sea);color:#fff}
 @media (max-width:900px){nav{display:none}.langs{margin-left:auto}}
-@media (max-width:400px){.bar{gap:.5rem}.logo{font-size:1rem;gap:.4rem}.logo svg{width:26px;height:26px}.langs button{padding:.3rem .45rem}}
+@media (max-width:400px){.bar{gap:.5rem}.logo{font-size:1rem;gap:.4rem}.logo svg{width:26px;height:26px}.langs a{padding:.3rem .45rem}}
 
 /* hero */
 .hero{background:linear-gradient(180deg,var(--sand) 0%,var(--sand) 60%,var(--paper) 100%);overflow:hidden;padding-block:0}
@@ -257,9 +266,9 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
       <a href="#contato" data-i18n="nav_contact">Contato</a>
     </nav>
     <div class="langs" role="group" aria-label="Idioma / Language">
-      <button data-lang="pt" aria-pressed="true">PT</button>
-      <button data-lang="en" aria-pressed="false">EN</button>
-      <button data-lang="es" aria-pressed="false">ES</button>
+      <a href="/" hreflang="pt-BR" lang="pt-BR" data-lang="pt" aria-current="true">PT</a>
+      <a href="/en/" hreflang="en" lang="en" data-lang="en">EN</a>
+      <a href="/es/" hreflang="es" lang="es" data-lang="es">ES</a>
     </div>
   </div>
 </header>
@@ -278,7 +287,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
       </div>
       <div class="rating"><b>9,6</b><span data-i18n="rating">nota dos hóspedes, em mais de 100 avaliações</span></div>
     </div>
-    <div class="scene"><img src="img/fachada-02.jpg" alt="Fachada da Búzios Flat Pousada com jardim e palmeiras" width="1600" height="1200" fetchpriority="high"></div>
+    <div class="scene"><img src="/img/fachada-02.jpg" srcset="/img/fachada-02-m.jpg 900w, /img/fachada-02.jpg 1600w" sizes="(max-width:800px) 100vw, 640px" alt="Fachada da Búzios Flat Pousada com jardim e palmeiras" width="1600" height="1200" fetchpriority="high"></div>
   </div>
 </section>
 
@@ -298,10 +307,10 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
 
 <section class="flats" id="flats">
   <div class="wrap">
-    <div class="head"><p class="eyebrow eyebrow-lg" data-i18n="flats_eyebrow">Nossos flats</p><p class="sub" data-i18n="flats_sub">São 18 flats em dois andares. Todos têm cozinha equipada, banheiro privativo, ar-condicionado, ventilador de teto, TV a cabo, Wi-Fi e varanda com rede.</p></div>
+    <div class="head"><h2 class="eyebrow eyebrow-lg" data-i18n="flats_eyebrow">Nossos flats</h2><p class="sub" data-i18n="flats_sub">São 18 flats em dois andares. Todos têm cozinha equipada, banheiro privativo, ar-condicionado, ventilador de teto, TV a cabo, Wi-Fi e varanda com rede.</p></div>
     <div class="flats-grid">
       <article class="flat" data-set="duplo">
-        <button class="flat-cover" data-open="duplo:0"><img src="img/duplo-06.jpg" alt="Quarto do Flat Duplo com cama de casal" loading="lazy" width="1400" height="1050"></button>
+        <button class="flat-cover" data-open="duplo:0"><img src="/img/duplo-06.jpg" alt="Quarto do Flat Duplo com cama de casal" loading="lazy" width="1400" height="1050"></button>
         <div class="thumbs"></div>
         <div class="flat-body">
           <h3><span data-i18n="f1t">Flat Duplo</span> <small class="area"><span data-i18n="aprox">aprox.</span> 15 m²</small></h3>
@@ -311,7 +320,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
         </div>
       </article>
       <article class="flat" data-set="familia">
-        <button class="flat-cover" data-open="familia:0"><img src="img/familia-01.jpg" alt="Flat Família com cama de casal e camas de solteiro" loading="lazy" width="1400" height="1050"></button>
+        <button class="flat-cover" data-open="familia:0"><img src="/img/familia-01.jpg" alt="Flat Família com cama de casal e camas de solteiro" loading="lazy" width="1400" height="1050"></button>
         <div class="thumbs"></div>
         <div class="flat-body">
           <h3><span data-i18n="f2t">Flat Família</span> <small class="area"><span data-i18n="aprox">aprox.</span> 30 m²</small></h3>
@@ -337,7 +346,7 @@ footer .wrap{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
         <div><dt>Check-out</dt><dd data-i18n="r_out">Até as 12h.</dd></div>
         <div><dt data-i18n="r_quiet_t">Horário de descanso</dt><dd><span data-i18n="r_quiet">Das 22h às 8h.</span><span class="quiet-rule" data-i18n="r_loud">Para que todos aproveitem o sossego da pousada, pedimos que não usem som alto em nenhum horário.</span></dd></div>
         <div><dt data-i18n="r_kids_t">Crianças</dt><dd data-i18n="r_kids">São bem-vindas. Uma criança de até 5 anos por flat, acompanhada dos pais, não paga.</dd></div>
-        <div><dt data-i18n="r_park_t">Estacionamento interno</dt><dd data-i18n="r_park">Gratuito, até um veículo por flat.</dd></div>
+        <div><dt data-i18n="r_park_t">Estacionamento interno</dt><dd data-i18n="r_park">Até um veículo por flat.</dd></div>
         <div><dt data-i18n="r_fee_t">Taxa de serviço</dt><dd data-i18n="r_fee">Não cobramos.</dd></div>
         <div><dt data-i18n="r_bf_t">Café da manhã</dt><dd data-i18n="r_bf">Não servimos, pois todos os flats têm uma mini cozinha equipada.</dd></div>
       </dl>
@@ -477,7 +486,7 @@ const T = {
   flats_eyebrow:"Our flats",flats_sub:"18 flats on two floors. Each has an equipped kitchen, private bathroom, air conditioning, ceiling fan, cable TV, Wi-Fi and a porch with a hammock.",
   f1t:"Double Flat",f1c1:"up to 2 guests",f1c2:"double bed",kit:"kitchen",porch:"porch with hammock",f1d:"The ideal flat for couples.",aprox:"approx.",price_l:"Rates",price_v:"Ask us on WhatsApp",from:"from",night:"per night",book:"Book",
   f2t:"Family Flat",f2c1:"up to 4 guests",f2c2:"double + 2 single",f2d:"Room for the whole family.",
-  rules_eyebrow:"House rules",rules_title:"Good to know before booking",r_in:"From 2 pm.",r_out:"By 12 pm.",r_quiet_t:"Rest hours",r_quiet:"10 pm to 8 am.",r_loud:"So everyone can enjoy the peace and quiet, we kindly ask that you don't play loud music at any time.",r_kids_t:"Children",r_kids:"Welcome. One child up to 5 years old per flat, staying with the parents, is free.",r_park_t:"On-site parking",r_park:"Free, up to one vehicle per flat.",r_fee_t:"Service fee",r_fee:"None.",r_bf_t:"Breakfast",r_bf:"Not served, since every flat has an equipped kitchenette.",
+  rules_eyebrow:"House rules",rules_title:"Good to know before booking",r_in:"From 2 pm.",r_out:"By 12 pm.",r_quiet_t:"Rest hours",r_quiet:"10 pm to 8 am.",r_loud:"So everyone can enjoy the peace and quiet, we kindly ask that you don't play loud music at any time.",r_kids_t:"Children",r_kids:"Welcome. One child up to 5 years old per flat, staying with the parents, is free.",r_park_t:"On-site parking",r_park:"Up to one vehicle per flat.",r_fee_t:"Service fee",r_fee:"None.",r_bf_t:"Breakfast",r_bf:"Not served, since every flat has an equipped kitchenette.",
   rates_t:"Ready to book?",rates_d:"Send us your dates and number of guests on WhatsApp. We'll confirm availability and the price right away.",rt_daily:"Nightly rates",rt_pack:"Holiday packages",rates_b:"Ask on WhatsApp",
   pet_t:"Your pet is on vacation too",pet_1:"Small dogs and cats are welcome, up to 1 pet per flat.",pet_2:"Fee of R$ 30 for every 7 days of stay.",pet_3:"Let us know about your pet when booking.",pet_rule:"<strong>Important:</strong> pets must be well-behaved and must not disturb other guests. Owners must pick up after their pet and clean any mess it makes, in the flat or in the common areas, and are responsible for any damage the animal causes.",
   gal_eyebrow:"Gallery",gal_title:"A taste of what awaits you",
@@ -491,7 +500,7 @@ const T = {
   flats_eyebrow:"Nuestros flats",flats_sub:"Son 18 flats en dos pisos. Todos tienen cocina equipada, baño privado, aire acondicionado, ventilador de techo, TV por cable, Wi-Fi y galería con hamaca.",
   f1t:"Flat Doble",f1c1:"hasta 2 personas",f1c2:"cama matrimonial",kit:"cocina",porch:"galería con hamaca",f1d:"El flat ideal para parejas.",aprox:"aprox.",price_l:"Tarifas",price_v:"Consulta por WhatsApp",from:"desde",night:"por noche",book:"Reservar",
   f2t:"Flat Familia",f2c1:"hasta 4 personas",f2c2:"matrimonial + 2 individuales",f2d:"Espacio para toda la familia.",
-  rules_eyebrow:"Normas de la posada",rules_title:"Bueno saber antes de reservar",r_in:"Desde las 14:00.",r_out:"Hasta las 12:00.",r_quiet_t:"Horario de descanso",r_quiet:"De 22:00 a 8:00.",r_loud:"Para que todos disfruten de la tranquilidad de la posada, les pedimos no poner música alta en ningún horario.",r_kids_t:"Niños",r_kids:"Son bienvenidos. Un niño de hasta 5 años por flat, acompañado de los padres, no paga.",r_park_t:"Estacionamiento interno",r_park:"Gratis, hasta un vehículo por flat.",r_fee_t:"Tasa de servicio",r_fee:"No cobramos.",r_bf_t:"Desayuno",r_bf:"No servimos, ya que todos los flats tienen una pequeña cocina equipada.",
+  rules_eyebrow:"Normas de la posada",rules_title:"Bueno saber antes de reservar",r_in:"Desde las 14:00.",r_out:"Hasta las 12:00.",r_quiet_t:"Horario de descanso",r_quiet:"De 22:00 a 8:00.",r_loud:"Para que todos disfruten de la tranquilidad de la posada, les pedimos no poner música alta en ningún horario.",r_kids_t:"Niños",r_kids:"Son bienvenidos. Un niño de hasta 5 años por flat, acompañado de los padres, no paga.",r_park_t:"Estacionamiento interno",r_park:"Hasta un vehículo por flat.",r_fee_t:"Tasa de servicio",r_fee:"No cobramos.",r_bf_t:"Desayuno",r_bf:"No servimos, ya que todos los flats tienen una pequeña cocina equipada.",
   rates_t:"¿Quieres reservar?",rates_d:"Envíanos tus fechas y el número de personas por WhatsApp. Confirmamos la disponibilidad y el precio enseguida.",rt_daily:"Tarifas por noche",rt_pack:"Paquetes de feriados",rates_b:"Consultar por WhatsApp",
   pet_t:"Tu mascota también está de vacaciones",pet_1:"Perros y gatos de tamaño pequeño son bienvenidos, como máximo 1 mascota por flat.",pet_2:"Tasa de R$ 30 cada 7 días de hospedaje.",pet_3:"Avísanos en la reserva que vienes con tu mascota.",pet_rule:"<strong>Importante:</strong> la mascota debe ser dócil y no puede molestar a los demás huéspedes. El dueño debe recoger sus necesidades y limpiar cualquier suciedad que haga la mascota, en el flat o en las áreas comunes, y responde por cualquier daño que cause el animal.",
   gal_eyebrow:"Galería",gal_title:"Un poco de lo que te espera",
@@ -512,8 +521,13 @@ const META = {
   en: {title: "Búzios Flat Pousada · Flats with kitchen and pool in Tucuns, Búzios", desc: "18 flats with a full kitchen, pool, barbecue area and parking in Tucuns, Búzios (Brazil), near Geribá Beach. Pets welcome. Book on WhatsApp."},
   es: {title: "Búzios Flat Pousada · Flats con cocina y piscina en Tucuns, Búzios", desc: "18 flats con cocina completa, piscina, parrilla y estacionamiento en Tucuns, Búzios (Brasil), cerca de la Playa Geribá. Aceptamos mascotas. Reserva por WhatsApp."}
 };
-document.querySelectorAll("[data-i18n]").forEach(el => T.pt[el.dataset.i18n] = el.textContent);
-document.querySelectorAll("[data-i18n-html]").forEach(el => T.pt[el.dataset.i18nHtml] = el.innerHTML);
+// Idioma desta página: "/" é português; "/en/" e "/es/" são geradas automaticamente a partir deste arquivo no envio para a HostGator.
+const PAGE = window.PRERENDER || document.documentElement.dataset.page || "pt";
+if (PAGE === "pt") {
+  document.querySelectorAll("[data-i18n]").forEach(el => T.pt[el.dataset.i18n] = el.textContent);
+  document.querySelectorAll("[data-i18n-html]").forEach(el => T.pt[el.dataset.i18nHtml] = el.innerHTML);
+}
+const OG_LOCALE = {pt: "pt_BR", en: "en_US", es: "es_AR"};
 
 function waLink(){
   return "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(WA_MSG[lang]);
@@ -522,17 +536,20 @@ function setLang(l){
   lang = l;
   document.querySelectorAll("[data-i18n]").forEach(el => { const v = T[l][el.dataset.i18n]; if (v) el.textContent = v; });
   document.querySelectorAll("[data-i18n-html]").forEach(el => { const v = T[l][el.dataset.i18nHtml]; if (v) el.innerHTML = v; });
-  document.querySelectorAll(".langs button").forEach(b => b.setAttribute("aria-pressed", b.dataset.lang === l));
+  document.querySelectorAll(".langs a").forEach(a => { if (a.dataset.lang === l) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
   document.documentElement.lang = l === "pt" ? "pt-BR" : l;
   document.title = META[l].title;
   document.querySelector('meta[name="description"]').content = META[l].desc;
-  const url = "https://www.buziosflat.com/" + (l === "pt" ? "" : "?lang=" + l);
+  const url = "https://www.buziosflat.com/" + (l === "pt" ? "" : l + "/");
   document.querySelector('link[rel="canonical"]').href = url;
-  try { history.replaceState(null, "", (l === "pt" ? location.pathname : "?lang=" + l) + location.hash); } catch (e) {}
+  document.querySelector('meta[property="og:url"]').content = url;
+  document.querySelector('meta[property="og:title"]').content = META[l].title;
+  document.querySelector('meta[property="og:description"]').content = META[l].desc;
+  document.querySelector('meta[property="og:locale"]').content = OG_LOCALE[l];
+  document.querySelectorAll('meta[property="og:locale:alternate"]').forEach((m, i) => m.content = Object.keys(OG_LOCALE).filter(k => k !== l).map(k => OG_LOCALE[k])[i]);
   document.querySelectorAll(".js-wa").forEach(a => a.href = waLink());
   renderTabs();
   renderRates();
-  try { localStorage.setItem("bf-lang", l); } catch (e) {}
 }
 
 // tarifas
@@ -555,27 +572,28 @@ function renderRates(){
 const tabsEl = document.querySelector(".g-tabs"), gridEl = document.querySelector(".g-grid");
 function renderTabs(){
   tabsEl.innerHTML = Object.keys(PHOTOS).map(k => `<button data-tab="${k}" aria-pressed="${k === tab}">${TABS[lang][k]}</button>`).join("");
-  gridEl.innerHTML = PHOTOS[tab].map((p, i) => `<button data-open="${tab}:${i}" aria-label="${TABS[lang][tab]} ${i + 1}"><img src="img/${p}-t.jpg" alt="${TABS[lang][tab]}" loading="lazy" width="520" height="390"></button>`).join("");
+  gridEl.innerHTML = PHOTOS[tab].map((p, i) => `<button data-open="${tab}:${i}" aria-label="${TABS[lang][tab]} ${i + 1}"><img src="/img/${p}-t.jpg" alt="${TABS[lang][tab]}" loading="lazy" width="520" height="390"></button>`).join("");
 }
 tabsEl.addEventListener("click", e => { const b = e.target.closest("[data-tab]"); if (b) { tab = b.dataset.tab; renderTabs(); } });
 document.querySelectorAll(".flat").forEach(card => {
   const set = card.dataset.set;
-  card.querySelector(".thumbs").innerHTML = PHOTOS[set].slice(1, 5).map((p, i) => `<button data-open="${set}:${i + 1}" aria-label="Foto ${i + 2}"><img src="img/${p}-t.jpg" alt="" loading="lazy" width="520" height="390"></button>`).join("");
+  card.querySelector(".thumbs").innerHTML = PHOTOS[set].slice(1, 5).map((p, i) => `<button data-open="${set}:${i + 1}" aria-label="Foto ${i + 2}"><img src="/img/${p}-t.jpg" alt="" loading="lazy" width="520" height="390"></button>`).join("");
 });
 
 // lightbox
 const lb = document.querySelector(".lb"), lbImg = lb.querySelector("img"), lbCount = lb.querySelector(".lb-count");
-let cur = {set: "piscina", i: 0};
-function show(){ const list = PHOTOS[cur.set]; lbImg.src = "img/" + list[cur.i] + ".jpg"; lbImg.alt = TABS[lang][cur.set]; lbCount.textContent = (cur.i + 1) + " / " + list.length; }
+let cur = {set: "piscina", i: 0}, lastFocus = null;
+function closeLb(){ lb.hidden = true; if (lastFocus) lastFocus.focus(); }
+function show(){ const list = PHOTOS[cur.set]; lbImg.src = "/img/" + list[cur.i] + ".jpg"; lbImg.alt = TABS[lang][cur.set]; lbCount.textContent = (cur.i + 1) + " / " + list.length; }
 function step(d){ const n = PHOTOS[cur.set].length; cur.i = (cur.i + d + n) % n; show(); }
 document.addEventListener("click", e => {
   const b = e.target.closest("[data-open]");
-  if (b) { const [set, i] = b.dataset.open.split(":"); cur = {set, i: +i}; show(); lb.hidden = false; lb.querySelector(".lb-close").focus(); }
+  if (b) { const [set, i] = b.dataset.open.split(":"); cur = {set, i: +i}; lastFocus = b; show(); lb.hidden = false; lb.querySelector(".lb-close").focus(); }
 });
 lb.querySelector(".lb-prev").onclick = () => step(-1);
 lb.querySelector(".lb-next").onclick = () => step(1);
-lb.querySelector(".lb-close").onclick = () => lb.hidden = true;
-lb.addEventListener("click", e => { if (e.target === lb) lb.hidden = true; });
+lb.querySelector(".lb-close").onclick = closeLb;
+lb.addEventListener("click", e => { if (e.target === lb) closeLb(); });
 let touchX = null;
 lb.addEventListener("touchstart", e => { touchX = e.touches[0].clientX; }, {passive: true});
 lb.addEventListener("touchend", e => {
@@ -585,19 +603,23 @@ lb.addEventListener("touchend", e => {
 });
 document.addEventListener("keydown", e => {
   if (lb.hidden) return;
-  if (e.key === "Escape") lb.hidden = true;
+  if (e.key === "Escape") closeLb();
+  if (e.key === "Tab") { const f = [...lb.querySelectorAll("button")]; const k = f.indexOf(document.activeElement); if (e.shiftKey && k <= 0) { e.preventDefault(); f[f.length - 1].focus(); } else if (!e.shiftKey && k === f.length - 1) { e.preventDefault(); f[0].focus(); } }
   if (e.key === "ArrowLeft") step(-1);
   if (e.key === "ArrowRight") step(1);
 });
 
-document.querySelectorAll(".langs button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
+// troca de idioma: cada idioma tem o seu endereço (/, /en/, /es/); a escolha fica lembrada
+document.querySelectorAll(".langs a").forEach(a => a.addEventListener("click", () => { try { localStorage.setItem("bf-lang", a.dataset.lang); } catch (e) {} }));
 document.getElementById("ano").textContent = new Date().getFullYear();
-let start = new URLSearchParams(location.search).get("lang") || "";
-if (!T[start]) { try { start = localStorage.getItem("bf-lang") || ""; } catch (e) {} }
-// robôs de busca (Google etc.) sempre veem o português na página principal
-if (!T[start] && /bot|crawl|spider|slurp|lighthouse/i.test(navigator.userAgent)) start = "pt";
-if (!T[start]) { const n = (navigator.language || "pt").slice(0, 2); start = n === "es" ? "es" : n === "pt" ? "pt" : "en"; }
-setLang(start);
+if (PAGE === "pt" && !window.PRERENDER) {
+  let want = new URLSearchParams(location.search).get("lang") || "";
+  if (!T[want]) { try { want = localStorage.getItem("bf-lang") || ""; } catch (e) {} }
+  // robôs de busca (Google etc.) sempre veem o português na página principal; visitantes com navegador em inglês ou espanhol vão para a sua versão
+  if (!T[want] && !/bot|crawl|spider|slurp|lighthouse|preview/i.test(navigator.userAgent)) { const n = (navigator.language || "pt").slice(0, 2); want = n === "es" ? "es" : n === "pt" ? "pt" : "en"; }
+  if (want === "en" || want === "es") location.replace("/" + want + "/" + location.hash);
+}
+setLang(PAGE);
 </script>
 </body>
 </html>

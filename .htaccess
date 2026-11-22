@@ -1,20 +1,59 @@
 # Site novo (index.html) tem prioridade sobre qualquer index.php na pasta
 DirectoryIndex index.html index.php
+# Não listar o conteúdo das pastas
+Options -Indexes
+# Página própria para endereços que não existem
+ErrorDocument 404 /404.html
+
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /
+
+# Endereço único: sem www vira www (evita conteúdo duplicado no Google)
+RewriteCond %{HTTP_HOST} ^buziosflat\.com$ [NC]
+RewriteRule ^(.*)$ https://www.buziosflat.com/$1 [R=301,L,E=semcache:1]
+
+# Endereços antigos dos idiomas (?lang=en / ?lang=es) vão para /en/ e /es/
+RewriteCond %{QUERY_STRING} (^|&)lang=(en|es)(&|$) [NC]
+RewriteRule ^(index\.html)?$ /%2/? [R=301,L,E=semcache:1]
+RewriteCond %{QUERY_STRING} (^|&)lang=pt(&|$) [NC]
+RewriteRule ^(index\.html)?$ /? [R=301,L,E=semcache:1]
+
+# Sobras do WordPress antigo: bloqueadas
+RewriteRule ^(wp-admin|wp-includes|wp-content)(/|$) - [F,L]
+</IfModule>
+
+# Arquivos internos e sobras do WordPress não podem ser abertos pelo navegador
+<FilesMatch "^(\.ftp-deploy-sync-state\.json|readme\.html|license\.txt|licenca\.html|xmlrpc\.php|wp-.*\.php|.*\.(sql|zip|bak|log|env|ini|cjs|md))$">
+Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+# Segurança
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-Frame-Options "SAMEORIGIN"
+Header always set Referrer-Policy "strict-origin-when-cross-origin"
+Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src https://www.google.com https://maps.google.com; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'; object-src 'none'; upgrade-insecure-requests"
+Header always set Cache-Control "no-store" env=semcache
 
 # Página sempre atualizada: navegador e cache da HostGator conferem a versão nova a cada visita
-<IfModule mod_headers.c>
 <FilesMatch "\.(html|xml|txt)$">
 Header set Cache-Control "no-cache, must-revalidate"
 </FilesMatch>
 </IfModule>
 
-# BEGIN WordPress
-<IfModule mod_rewrite.c>
-RewriteEngine On
-RewriteBase /
-RewriteRule ^index\.php$ - [L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule . /index.php [L]
+# Fotos e ícones ficam guardados no navegador por 7 dias (site abre mais rápido na segunda visita)
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType image/jpeg "access plus 7 days"
+ExpiresByType image/png "access plus 7 days"
+ExpiresByType image/svg+xml "access plus 7 days"
+ExpiresByType image/x-icon "access plus 7 days"
+ExpiresByType image/vnd.microsoft.icon "access plus 7 days"
 </IfModule>
-# END WordPress
+
+# Teste temporário para ativar o HTTPS obrigatório com segurança
+<Files "teste-https.php">
+Require all granted
+</Files>

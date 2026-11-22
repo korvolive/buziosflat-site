@@ -4,3 +4,8 @@ wp-config.php
 *.sql
 *.zip
 *.wpress
+
+# geradas automaticamente no envio (scripts/gerar-idiomas.cjs)
+/en/
+/es/
+node_modules/
