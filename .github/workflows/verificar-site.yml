@@ -10,21 +10,19 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: DNS
-        run: |
-          for d in buziosflat.com www.buziosflat.com buziosflat.com.br www.buziosflat.com.br; do echo "::warning::DNS $d NS=$(dig +short NS $d | tr '\n' ' ') A=$(dig +short A $d | tr '\n' ' ')"; done
-      - name: HTTP
+      - name: Relatorio
         run: |
           set +e
-          for u in https://www.buziosflat.com/ https://buziosflat.com/ http://www.buziosflat.com/ https://www.buziosflat.com/?nc=$RANDOM https://buziosflat.com/?nc=$RANDOM http://www.buziosflat.com.br/ https://www.buziosflat.com.br/ http://buziosflat.com.br/; do
-            h=$(curl -sS -m 20 -o /tmp/p.html -D - "$u" 2>&1 | grep -iE '^(HTTP|location|server|curl|x-.*cache|cache-control|age)' | tr -d '\r' | tr '\n' ' '); t=$(grep -o '<title>[^<]*' /tmp/p.html | head -1); n=$(grep -c 'Horário de descanso' /tmp/p.html); sl=$(grep -c 'a sua casa em Búzios' /tmp/p.html); echo "::warning::$u => $h | $t | novo=$n slogan=$sl"
-          done
-      - name: Detalhes
-        run: |
-          set +e
-          for u in https://www.buziosflat.com/.htaccess https://www.buziosflat.com/index.html https://www.buziosflat.com/index.php https://www.buziosflat.com/wp-login.php https://www.buziosflat.com/img/duplo-09.jpg https://www.buziosflat.com/robots.txt https://www.buziosflat.com/sitemap.xml; do
-            h=$(curl -sS -m 20 -o /tmp/p.html -D - "$u" 2>&1 | grep -iE '^(HTTP|location|last-modified|content-type|cache-control|x-.*cache)' | tr -d '\r' | tr '\n' ' '); t=$(grep -o '<title>[^<]*' /tmp/p.html | head -1); n=$(grep -c 'Horário de descanso' /tmp/p.html); echo "::warning::$u => $h | $t | novo=$n"
-          done
-          curl -sS -m 20 https://www.buziosflat.com/ -o /tmp/h.html
-          echo "::warning::GEN $(grep -o '<meta name=.generator[^>]*' /tmp/h.html | head -2 | tr '\n' ' ') WP=$(grep -c 'wp-content' /tmp/h.html) LINKS=$(grep -o 'wp-content/[a-z]*/[a-zA-Z0-9_-]*' /tmp/h.html | sort -u | head -8 | tr '\n' ' ')"
-          echo "::warning::HOSTS $(grep -oE 'https?://[a-zA-Z0-9.-]+' /tmp/h.html | sort | uniq -c | sort -rn | head -6 | tr '\n' ' ')"
+          R=relatorio.txt
+          h(){ echo "===== $1" >>$R; curl -sS -m 25 -o /tmp/body -D - "$1" 2>&1 | tr -d '\r' >>$R; echo "-- corpo: $(head -c 300 /tmp/body | tr '\n' ' ')" >>$R; }
+          for d in buziosflat.com www.buziosflat.com buziosflat.com.br www.buziosflat.com.br; do echo "DNS $d A=$(dig +short A $d | tr '\n' ' ') NS=$(dig +short NS $d | tr '\n' ' ')" >>$R; done
+          for u in https://www.buziosflat.com/ http://www.buziosflat.com/ https://buziosflat.com/ http://buziosflat.com/ "https://www.buziosflat.com/?lang=en" https://www.buziosflat.com/en/ https://www.buziosflat.com/pagina-que-nao-existe https://www.buziosflat.com/.htaccess https://www.buziosflat.com/index.php https://www.buziosflat.com/wp-login.php https://www.buziosflat.com/wp-admin/ https://www.buziosflat.com/wp-config.php https://www.buziosflat.com/xmlrpc.php https://www.buziosflat.com/wp-content/ https://www.buziosflat.com/readme.html https://www.buziosflat.com/img/ https://www.buziosflat.com/img/fachada-02.jpg https://www.buziosflat.com/robots.txt https://www.buziosflat.com/sitemap.xml https://www.buziosflat.com/favicon.ico https://www.buziosflat.com/.ftp-deploy-sync-state.json http://www.buziosflat.com.br/ https://www.buziosflat.com.br/ https://hotelar.com/buziosflat https://wa.me/5521999936368; do h "$u"; done
+          echo "===== SSL" >>$R; echo | openssl s_client -connect www.buziosflat.com:443 -servername www.buziosflat.com 2>/dev/null | openssl x509 -noout -subject -issuer -dates -ext subjectAltName >>$R 2>&1
+          echo | openssl s_client -connect buziosflat.com:443 -servername buziosflat.com 2>/dev/null | openssl x509 -noout -subject -dates -ext subjectAltName >>$R 2>&1
+          curl -sS -m 25 -H 'Accept-Encoding: gzip' -o /dev/null -D - https://www.buziosflat.com/ | grep -i -E 'content-encoding|content-length' >>$R
+          split -b 3500 $R parte_
+          for f in parte_*; do echo "::warning title=$f::$(cat $f | sed 's/%/%25/g' | awk '{printf "%s%%0A", $0}')"; done
+      - uses: actions/upload-artifact@v4
+        with:
+          name: relatorio
+          path: relatorio.txt
