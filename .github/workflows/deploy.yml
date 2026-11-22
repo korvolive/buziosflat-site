@@ -10,6 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Gerar as versões em inglês e espanhol (/en/ e /es/)
+        run: |
+          mkdir -p /tmp/gen && npm install --prefix /tmp/gen --no-audit --no-fund jsdom@24.1.3
+          NODE_PATH=/tmp/gen/node_modules node scripts/gerar-idiomas.cjs
       - name: Enviar arquivos por FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -19,6 +26,8 @@ jobs:
           server-dir: ./
           exclude: |
             **/.git/**
-            .gitignore
+            **/.git*
+            **/node_modules/**
             .github/**
+            scripts/**
             README.md
